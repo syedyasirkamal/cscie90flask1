@@ -1,28 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--<meta name=description content="This site was generated with Anima. www.animaapp.com"/>-->
+    <!-- <link rel="shortcut icon" type=image/png href="https://animaproject.s3.amazonaws.com/home/favicon.png" /> -->
+    <meta name="viewport" content="width=1728, maximum-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png" />
+    <meta name="og:type" content="website" />
+    <meta name="twitter:card" content="photo" />
 
-<HTML>
-<HEAD>
-<TITLE>ADV-IT</TITLE>
-<SCRIPT LANGUAGE="JavaScript">
-      var sizes = new Array(0,1,2,4,8,10,12);
-      sizes.pos = 0;
-    
-function Elastic()
-{
-    var el = document.all.elastic
-    if (null == el.direction)el.direction = 1
-    else if ((sizes.pos > sizes.length - 2) || (0 == sizes.pos))
-    el.direction *= -1
-    el.style.letterSpacing = sizes[sizes.pos += el.direction]
-setTimeout('Elastic()',100)
-}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="{{url_for('static', filename='css/faqs-style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/macbook-pro-16-1.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styleguide.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/globals.css')}}" />
+  </head>
+  <body style="margin: 0; background: #ffffff">
+    <input type="hidden" id="anPageName" name="page" value="macbook-pro-16-1" />
+    <div class="container-center-horizontal">
+      <div class="macbook-pro-16-1 screen">
+        <div class="rectangle-1"></div>
+        <div class="navbar nunito-black-eerie-black-20px">
+          <img class="chidolingo-logo-1" src="{{url_for('static', filename='img/chidolingo-logo-1-1@2x.png')}}" alt="Chidolingo logo 1" />
+     <div class="navbar-link-meet-our-teachers">
+     <a href="#" onClick="MyWindow=window.open('https://chidolingo.com/private-tutoring-online/','MyWindow','width=600,height=300'); return false;">
+         <span class="nunito-black-eerie-black-20px">Meet our Teachers</span></a>
+          </div>
+          <div class="navbar-link-free-lesson-sign-up">
+                 <a href="#" onClick="MyWindow=window.open('/trial','MyWindow','width=600,height=800'); return false;">
+        <span class="nunito-black-eerie-black-20px">Free Lesson Sign Up</span></a>
+          </div>
+          <div class="navbar-link-join-our-mailing-list">
+                  <a href="#" onClick="MyWindow=window.open('/signup','MyWindow','width=600,height=300'); return false;">
+        <span class="nunito-black-eerie-black-20px">Join our Mailing List</span></a>
+          </div>
+           <div class="navbar-link-place"><a href="/flask-app/static"><span class="nunito-black-eerie-black-20px">Home</span></a>
+            </div>
+        </div>
+        <div class="overlap-group4">
 
-</SCRIPT>
-<BODY  bgcolor=black  onLoad=Elastic()>
-<CENTER>
-<font color="white"><h2>Hello from <font color="yellow">Denis Astahov!</font><br>
-Welcome to Python Flask Web Page!
-<font color="gold"><H1 ID="elastic" ALIGN="Center">GitHub Actions RULEZZzz!</H1>
-<br>
+           <div id="content">{% block content %}{% endblock %}</div>
+          <img class="banner-website-1" src="{{url_for('static', filename='img/banner-website-1-1@2x.png')}}" alt="banner-website 1" />
 
-</body>
-</HTML>
+            <img class="chipbook-1" src="{{url_for('static', filename='img/chipbook-1-1@2x.png')}}" alt="Chipbook 1" />
+          <img class="wave-1" src="{{url_for('static', filename='img/wave-1-1@2x.png')}}" alt="Wave 1" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
