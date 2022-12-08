@@ -1,9 +1,8 @@
 #          Import some packages               #
 ###############################################
 from flask import Flask, render_template, request
-from flask_mysqldb import MySQL
+import MySQLdb
 from flask_bootstrap import Bootstrap
-from flask_mail import Mail, Message
 from models import signupForm
 
 
@@ -20,28 +19,14 @@ Bootstrap(application)
 ###############################################
 
 
-application.config['MYSQL_HOST'] = 'flask-application.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
-application.config['MYSQL_USER'] = 'admin'
-application.config['MYSQL_PASSWORD'] = '123abcde'
-application.config['MYSQL_PORT'] = 3306
-application.config['MYSQL_DB'] = 'sys'
-application.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
-mysql = MySQL(application)
-
-###############################################
-#         Flask Mail application
-###############################################
-
-# configuration of mail
-application.config['MAIL_SERVER'] = 'smtp.gmail.com'
-application.config['MAIL_PORT'] = 465
-application.config['MAIL_USERNAME'] = 'chidopromos@gmail.com'
-application.config['MAIL_PASSWORD'] = 'onzzqwzrobdsmcna'
-application.config['MAIL_USE_TLS'] = False
-application.config['MAIL_USE_SSL'] = True
-mail = Mail(application)
-
+db = MySQLdb.connect(host="flask-application.cpetmtsmol3b.us-east-1.rds.amazonaws.com",
+                     port=3306,
+                     user="admin",
+                     passwd="123abcde",
+                     db="sys",
+                     autocommit=True,
+                     use_unicode=True
+                     )
 
 ###############################################
 #       Render Contact page                   #
@@ -62,7 +47,19 @@ def home():
 def signupsubmit():
     if request.method == 'GET':
         return "Login via the login Form"
-
+    cform = signupForm()
+    if cform.validate_on_submit():
+        if request.method == 'POST':
+            name = request.form['name']
+            email = request.form['email']
+            cursor = db.cursor()
+            database = "INSERT INTO contact (name, email) VALUES (%s, %s)"
+            val = (name, email)
+            cursor.execute(database, val)
+            cursor.close()
+            return render_template("signupconfirmation.html", name=name, email=email)
+    else:
+        return render_template("signup.html", form=cform)
 
 
 ###############################################
