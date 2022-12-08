@@ -4,25 +4,16 @@ from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 from flask_bootstrap import Bootstrap
 from flask_mail import Mail, Message
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, email
-
-
-class signupForm(FlaskForm):
-    name = StringField(label='Name', validators=[DataRequired()])
-    email = StringField(label='Email', validators=[
-        DataRequired(), email()])
-    submit = SubmitField(label="Test Form")
+from models import signupForm
 
 
 ###############################################
-#          Define flask app                   #from flaskapp import db, Contact
+#          Define flask application                   #from flaskapplication import db, Contact
 ###############################################
 
-app = Flask(__name__,template_folder='templates')
-app.secret_key = 'the random string'
-Bootstrap(app)
+application = Flask(__name__,template_folder='templates')
+application.secret_key = 'the random string'
+Bootstrap(application)
 
 
 
@@ -31,30 +22,30 @@ Bootstrap(app)
 ###############################################
 
 
-app.config['MYSQL_HOST'] = 'flask-app.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = '123abcde'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_DB'] = 'sys'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+application.config['MYSQL_HOST'] = 'flask-application.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
+application.config['MYSQL_USER'] = 'admin'
+application.config['MYSQL_PASSWORD'] = '123abcde'
+application.config['MYSQL_PORT'] = 3306
+application.config['MYSQL_DB'] = 'sys'
+application.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
-mysql = MySQL(app)
+mysql = MySQL(application)
 
 ###############################################
-#         Flask Mail App
+#         Flask Mail application
 ###############################################
 
 # configuration of mail
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'chidopromos@gmail.com'
-app.config['MAIL_PASSWORD'] = 'onzzqwzrobdsmcna'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
+application.config['MAIL_SERVER'] = 'smtp.gmail.com'
+application.config['MAIL_PORT'] = 465
+application.config['MAIL_USERNAME'] = 'chidopromos@gmail.com'
+application.config['MAIL_PASSWORD'] = 'onzzqwzrobdsmcna'
+application.config['MAIL_USE_TLS'] = False
+application.config['MAIL_USE_SSL'] = True
+mail = Mail(application)
 
 
-@app.route('/createdatabase')
+@application.route('/createdatabase')
 def createdatabase():
     # Creating a connection cursor
     cursor = mysql.connection.cursor()
@@ -77,13 +68,13 @@ def createdatabase():
 
 
 
-@app.route('/signup', methods=["GET", "POST"])
+@application.route('/signup', methods=["GET", "POST"])
 def home():
     cform = signupForm()
     return render_template("signup.html", form=cform)
 
 
-@app.route('/signup/submit', methods=['POST', 'GET'])
+@application.route('/signup/submit', methods=['POST', 'GET'])
 def signupsubmit():
     if request.method == 'GET':
         return "Login via the login Form"
@@ -113,9 +104,9 @@ def signupsubmit():
 
 
 ###############################################
-#                Run app                      #
+#                Run application                      #
 ###############################################
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    application.debug = True
+    application.run()
