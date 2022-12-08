@@ -65,6 +65,9 @@ def createdatabase():
 #       Render Contact page                   #
 ###############################################
 
+@application.route("/")
+def root():
+    return render_template("index.html")
 
 
 
