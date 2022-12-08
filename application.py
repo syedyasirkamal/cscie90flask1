@@ -11,10 +11,8 @@ from models import signupForm
 #          Define flask application                   #from flaskapplication import db, Contact
 ###############################################
 
-application = Flask(__name__,template_folder='templates')
-application.secret_key = 'the random string'
+application = Flask(__name__)
 Bootstrap(application)
-
 
 
 ###############################################
@@ -54,7 +52,6 @@ def root():
     return render_template("index.html")
 
 
-
 @application.route('/signup', methods=["GET", "POST"])
 def home():
     cform = signupForm()
@@ -73,7 +70,7 @@ def signupsubmit():
             cursor = mysql.connection.cursor()
             database = "INSERT INTO contact (name, email) VALUES (%s, %s)"
             val = (name, email)
-            cursor.execute(database,val)
+            cursor.execute(database, val)
             mysql.connection.commit()
             cursor.close()
 
