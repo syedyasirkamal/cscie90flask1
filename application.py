@@ -1,12 +1,20 @@
 #          Import some packages               #
 ###############################################
-import os
-from flask import Flask, render_template, request, redirect, url_for
-from app.forms import signupForm
+from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 from flask_bootstrap import Bootstrap
 from flask_datepicker import datepicker
 from flask_mail import Mail, Message
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, email
+
+
+class signupForm(FlaskForm):
+    name = StringField(label='Name', validators=[DataRequired()])
+    email = StringField(label='Email', validators=[
+        DataRequired(), email()])
+    submit = SubmitField(label="Test Form")
 
 
 ###############################################
