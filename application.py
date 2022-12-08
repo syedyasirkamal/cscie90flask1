@@ -13,10 +13,9 @@ application = Flask(__name__)
 
 @application.route("/")
 def root():
-    return rend
-@application.route("/hello")
-def index():
-    return "Hello World from Flask Hello Page.<b> v1.0"
+    return render_template("index.html")
+
+
 
 #--------Main------------------
 if __name__ == "__main__":
