@@ -71,41 +71,6 @@ def root():
 
 
 
-@application.route('/signup', methods=["GET", "POST"])
-def home():
-    cform = signupForm()
-    return render_template("signup.html", form=cform)
-
-
-@application.route('/signup/submit', methods=['POST', 'GET'])
-def signupsubmit():
-    if request.method == 'GET':
-        return "Login via the login Form"
-    cform = signupForm()
-    if cform.validate_on_submit():
-        if request.method == 'POST':
-            name = request.form['name']
-            email = request.form['email']
-            cursor = mysql.connection.cursor()
-            database = "INSERT INTO contact (name, email) VALUES (%s, %s)"
-            val = (name, email)
-            cursor.execute(database,val)
-            mysql.connection.commit()
-            cursor.close()
-
-            msg = Message(
-                'Thank you for joining ChidoLingo Promos Mailing List',
-                sender='chidopromos@gmail.com',
-                recipients=[email]
-            )
-            msg.html = render_template(template_name_or_list="email-maillist.html")
-            mail.send(msg)
-            return render_template("signupconfirmation.html", name=name, email=email)
-
-    else:
-        return render_template("signup.html", form=cform)
-
-
 ###############################################
 #                Run application                      #
 ###############################################
