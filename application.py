@@ -3,7 +3,6 @@
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 from flask_bootstrap import Bootstrap
-from flask_datepicker import datepicker
 from flask_mail import Mail, Message
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
