@@ -1,7 +1,9 @@
 #          Import some packages               #
 ###############################################
 from flask import Flask, render_template, request
-
+from flask_mysqldb import MySQL
+from flask_mail import Mail, Message
+from models import signupForm
 
 
 ###############################################
