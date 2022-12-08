@@ -13,12 +13,7 @@ application = Flask(__name__)
 
 @application.route("/")
 def root():
-    return render_template("index.html")
-
-@application.route("/help")
-def helppage():
-    return render_template("help.html")
-
+    return rend
 @application.route("/hello")
 def index():
     return "Hello World from Flask Hello Page.<b> v1.0"
