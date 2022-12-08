@@ -2,6 +2,9 @@
 ###############################################
 from flask import Flask, render_template, request
 
+from flask_bootstrap import Bootstrap
+
+
 
 ###############################################
 #          Define flask application                   #from flaskapplication import db, Contact
@@ -9,7 +12,7 @@ from flask import Flask, render_template, request
 
 application = Flask(__name__,template_folder='templates')
 application.secret_key = 'the random string'
-
+Bootstrap(application)
 
 
 ###############################################
