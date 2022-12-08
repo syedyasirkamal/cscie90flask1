@@ -1,10 +1,7 @@
 #          Import some packages               #
 ###############################################
 from flask import Flask, render_template, request
-from flask_mysqldb import MySQL
-from flask_bootstrap import Bootstrap
-from flask_mail import Mail, Message
-from models import signupForm
+
 
 
 ###############################################
@@ -13,7 +10,7 @@ from models import signupForm
 
 application = Flask(__name__,template_folder='templates')
 application.secret_key = 'the random string'
-Bootstrap(application)
+
 
 
 ###############################################
