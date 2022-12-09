@@ -21,11 +21,11 @@ Bootstrap(application)
 ###############################################
 
 
-application.config['MYSQL_HOST'] = 'flask-app.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
+application.config['MYSQL_HOST'] = 'awseb-e-r3pvnbrmxr-stack-awsebrdsdatabase-lh00miqeio2a.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
 application.config['MYSQL_USER'] = 'admin'
 application.config['MYSQL_PASSWORD'] = '123abcde'
 application.config['MYSQL_PORT'] = 3306
-application.config['MYSQL_DB'] = 'sys'
+application.config['MYSQL_DB'] = 'ebdb'
 application.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(application)
@@ -34,6 +34,21 @@ mysql = MySQL(application)
 #         Flask Mail application
 ###############################################
 
+@application.route('/createdatabase')
+def createdatabase():
+    # Creating a connection cursor
+    cursor = mysql.connection.cursor()
+
+    # Executing SQL Statements
+    cursor.execute('''CREATE TABLE contact (id INTEGER, name VARCHAR(50), email VARCHAR(100), message VARCHAR(2000), date_created TIMESTAMP  DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id))''')
+    #cursor.execute('''CREATE TABLE trial (id INTEGER, firstname VARCHAR(50), lastname VARCHAR(50), email VARCHAR(100), tutor VARCHAR(100), datetime  DATETIME, date_created TIMESTAMP  DEFAULT CURRENT_TIMESTAMP NOT NULL, PRIMARY KEY (id))''')
+
+    # Saving the Actions performed on the DB
+    mysql.connection.commit()
+
+    # Closing the cursor
+    cursor.close()
+    return 'done!'
 
 
 ###############################################
