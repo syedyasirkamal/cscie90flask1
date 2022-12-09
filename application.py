@@ -7,12 +7,12 @@ from models import signupForm
 
 
 ###############################################
-#          Define flask app                   #from flaskapp import db, Contact
+#          Define flask application                   #from flaskapplication import db, Contact
 ###############################################
 
-app = Flask(__name__,template_folder='templates')
-app.secret_key = 'the random string'
-Bootstrap(app)
+application = Flask(__name__,template_folder='templates')
+application.secret_key = 'the random string'
+Bootstrap(application)
 
 
 
@@ -21,17 +21,17 @@ Bootstrap(app)
 ###############################################
 
 
-app.config['MYSQL_HOST'] = 'flask-app.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'admin'
-app.config['MYSQL_PASSWORD'] = '123abcde'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_DB'] = 'sys'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+application.config['MYSQL_HOST'] = 'flask-app.cpetmtsmol3b.us-east-1.rds.amazonaws.com'
+application.config['MYSQL_USER'] = 'admin'
+application.config['MYSQL_PASSWORD'] = '123abcde'
+application.config['MYSQL_PORT'] = 3306
+application.config['MYSQL_DB'] = 'sys'
+application.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
-mysql = MySQL(app)
+mysql = MySQL(application)
 
 ###############################################
-#         Flask Mail app
+#         Flask Mail application
 ###############################################
 
 
@@ -43,13 +43,13 @@ mysql = MySQL(app)
 
 
 
-@app.route('/', methods=["GET", "POST"])
+@application.route('/', methods=["GET", "POST"])
 def home():
     cform = signupForm()
     return render_template("signup.html", form=cform)
 
 
-@app.route('/signup/submit', methods=['POST', 'GET'])
+@application.route('/signup/submit', methods=['POST', 'GET'])
 def signupsubmit():
     if request.method == 'GET':
         return "Login via the login Form"
@@ -72,9 +72,9 @@ def signupsubmit():
 
 
 ###############################################
-#                Run app                      #
+#                Run application                      #
 ###############################################
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    application.debug = True
+    application.run()
